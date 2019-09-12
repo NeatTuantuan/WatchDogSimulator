@@ -16,6 +16,7 @@ import java.util.List;
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
 public class MyDecoder extends ByteToMessageDecoder {
+
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
         if (byteBuf.readableBytes() < 4) {

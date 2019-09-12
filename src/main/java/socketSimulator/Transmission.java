@@ -1,4 +1,4 @@
-package simulator;
+package socketSimulator;
 
 import entity.Status;
 import util.ParseJson;
