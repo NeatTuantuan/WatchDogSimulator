@@ -12,7 +12,7 @@ import java.util.Date;
  * @Version 1.0
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
-public class PhotoUpload {
+public class PhotoUpload extends Base{
     RadomUtil random = new RadomUtil();
     /**
      * 令牌

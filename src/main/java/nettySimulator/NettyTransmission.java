@@ -38,9 +38,9 @@ public class NettyTransmission {
             @Override
             protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
 //                nioSocketChannel.pipeline().addLast(new StringDecoder());
-                nioSocketChannel.pipeline().addLast(new StringEncoder());
+//                nioSocketChannel.pipeline().addLast(new StringEncoder());
+                nioSocketChannel.pipeline().addLast(new MyEncoder());
 //                nioSocketChannel.pipeline().addLast(new DelimiterBasedFrameDecoder(Integer.MAX_VALUE, Delimiters.lineDelimiter()[0]));
-//                nioSocketChannel.pipeline().addLast();
             }
         });
 
@@ -49,7 +49,7 @@ public class NettyTransmission {
             ChannelFuture future = client.connect("127.0.0.1",8080).sync();
 
 //            while(true){
-                future.channel().writeAndFlush(parseJson.Object2Json(new Record(imageUtil.getImageBinary())));
+                future.channel().writeAndFlush(parseJson.Object2Json(new Status()));
                 Thread.sleep(2000);
 //            }
             future.channel().closeFuture().sync();
