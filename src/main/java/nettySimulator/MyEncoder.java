@@ -1,5 +1,8 @@
 package nettySimulator;
 
+import entity.Base;
+import entity.PhotoUpload;
+import entity.Status;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
@@ -16,12 +19,40 @@ import util.ParseJson;
 public class MyEncoder extends MessageToByteEncoder {
 
     ParseJson parseJson = new ParseJson();
+    byte[] body = null;
+    int dataType = -1;
+    int dataLength = -1;
 
+    /**
+     * 自定义编码器，第一个字段存放数据类型，第二个字段存放数据长度，第三个字段存放数据
+     * @param channelHandlerContext
+     * @param o
+     * @param byteBuf
+     * @throws Exception
+     */
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, Object o, ByteBuf byteBuf) throws Exception {
-        byte[] body =  parseJson.Object2Bytes(o);
-        int dataLength = body.length;
-        byteBuf.writeInt(dataLength);
-        byteBuf.writeBytes(body);
+        if (o instanceof Status) {
+            body = parseJson.Object2Bytes(o);
+            dataType = 1;
+            dataLength = body.length;
+            byteBuf.writeInt(dataLength);
+            byteBuf.writeInt(dataType);
+            byteBuf.writeBytes(body);
+        }else if (o instanceof PhotoUpload){
+            body = parseJson.Object2Bytes(o);
+            dataType = 2;
+            dataLength = body.length;
+            byteBuf.writeInt(dataLength);
+            byteBuf.writeInt(dataType);
+            byteBuf.writeBytes(body);
+        }else {
+            body = parseJson.Object2Bytes(o);
+            dataType = 0;
+            dataLength = body.length;
+            byteBuf.writeInt(dataLength);
+            byteBuf.writeInt(dataType);
+            byteBuf.writeBytes(body);
+        }
     }
 }

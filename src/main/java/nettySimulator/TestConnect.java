@@ -29,7 +29,8 @@ public class TestConnect  {
 
         serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
             protected void initChannel(SocketChannel socketChannel) throws Exception {
-                socketChannel.pipeline().addLast(new StringDecoder());
+//                socketChannel.pipeline().addLast(new StringDecoder());
+                socketChannel.pipeline().addLast(new MyDecoder());
                 socketChannel.pipeline().addLast(new ServervHandler());
             }
 

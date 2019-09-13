@@ -1,5 +1,7 @@
 package entity;
 
+import util.RadomUtil;
+
 import java.util.Date;
 
 /**
@@ -10,8 +12,8 @@ import java.util.Date;
  * @Version 1.0
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
-public class PhotoUpload {
-
+public class PhotoUpload extends Base{
+    RadomUtil random = new RadomUtil();
     /**
      * 令牌
      */
@@ -27,7 +29,7 @@ public class PhotoUpload {
     /**
      *门禁端比对人员类型（0:住户，1:陌生人）
      */
-    private int USER_TYPE = 0;
+    private int USER_TYPE = random.nextInt(2);
     /**
      *抓拍照片
      */

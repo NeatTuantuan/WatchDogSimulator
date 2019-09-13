@@ -16,6 +16,13 @@ import java.util.List;
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
 public class MyDecoder extends ByteToMessageDecoder {
+    /**
+     * 自定义解码器
+     * @param channelHandlerContext
+     * @param byteBuf
+     * @param list
+     * @throws Exception
+     */
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
         if (byteBuf.readableBytes() < 4) {
@@ -32,8 +39,18 @@ public class MyDecoder extends ByteToMessageDecoder {
             return;
         }
 
-        byte[] body = new byte[dataLength];  //  嗯，这时候，我们读到的长度，满足我们的要求了，把传送过来的数据，取出来吧~~
+        byte[] body = new byte[dataLength+4];  //  嗯，这时候，我们读到的长度，满足我们的要求了，把传送过来的数据，取出来吧~~
         byteBuf.readBytes(body);  //
+
+//        byte[] temp = new byte[4];
+//        byteBuf.readBytes(temp,0,4);
+//        int i = temp[3] & 0xFF |
+//                (temp[2] & 0xFF) << 8 |
+//                (temp[1] & 0xFF) << 16 |
+//                (temp[0] & 0xFF) << 24;
+//
+//        System.out.println(i);
+
         Object o = new String(body);  //将byte数据转化为我们需要的对象。伪代码，用什么序列化，自行选择
         list.add(o);
     }

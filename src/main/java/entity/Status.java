@@ -1,5 +1,7 @@
 package entity;
 
+import util.RadomUtil;
+
 import java.util.Date;
 
 /**
@@ -10,7 +12,9 @@ import java.util.Date;
  * @Version 1.0
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
-public class Status {
+public class Status extends Base{
+    RadomUtil random = new RadomUtil();
+
     /**
      * 令牌
      */
@@ -26,7 +30,7 @@ public class Status {
     /**
      *开关门状态（0：开门，1：关门）
      */
-    private int DOOR_STATUS = 1;
+    private int DOOR_STATUS = random.nextInt(2);
 
     public String getTOKEN() {
         return TOKEN;

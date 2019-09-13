@@ -1,5 +1,7 @@
 package entity;
 
+import util.RadomUtil;
+
 import java.util.Date;
 
 /**
@@ -10,7 +12,8 @@ import java.util.Date;
  * @Version 1.0
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
-public class Record {
+public class Record extends Base{
+    RadomUtil random = new RadomUtil();
     /**
      * 令牌
      */
@@ -26,15 +29,15 @@ public class Record {
     /**
      * 开门方式（0：门禁卡，1:人像）
      */
-    private int OPEN_TYPE = 0;
+    private int OPEN_TYPE = random.nextInt(2);
     /**
      * 门禁卡ID
      */
-    private String CARD_ID = "190271";
+    private String CARD_ID = random.getIdCardRadom();
     /**
      * 人卡是否一致（true:一致，false：不一致）
      */
-    private boolean CARD_MATCH_USER = true;
+    private boolean CARD_MATCH_USER = random.nextInt(2) == 1?true:false;
     /**
      * 开门时人像照片
      */
