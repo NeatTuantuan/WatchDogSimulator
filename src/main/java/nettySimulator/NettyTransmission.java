@@ -40,7 +40,6 @@ public class NettyTransmission {
 //                nioSocketChannel.pipeline().addLast(new StringDecoder());
 //                nioSocketChannel.pipeline().addLast(new StringEncoder());
                 nioSocketChannel.pipeline().addLast(new MyEncoder());
-//                nioSocketChannel.pipeline().addLast(new DelimiterBasedFrameDecoder(Integer.MAX_VALUE, Delimiters.lineDelimiter()[0]));
             }
         });
 
@@ -49,8 +48,10 @@ public class NettyTransmission {
             ChannelFuture future = client.connect("127.0.0.1",8080).sync();
 
 //            while(true){
-                future.channel().writeAndFlush(parseJson.Object2Json(new Status()));
-                Thread.sleep(2000);
+//                future.channel().writeAndFlush(parseJson.Object2Json(new Status()));
+            future.channel().writeAndFlush(new Status());
+
+            Thread.sleep(2000);
 //            }
             future.channel().closeFuture().sync();
 

@@ -39,7 +39,10 @@ public class MyDecoder extends ByteToMessageDecoder {
             return;
         }
 
-        byte[] body = new byte[dataLength+4];  //  嗯，这时候，我们读到的长度，满足我们的要求了，把传送过来的数据，取出来吧~~
+        int dataType = byteBuf.readInt();
+        System.out.println(dataType);
+
+        byte[] body = new byte[dataLength];  //  嗯，这时候，我们读到的长度，满足我们的要求了，把传送过来的数据，取出来吧~~
         byteBuf.readBytes(body);  //
 
 //        byte[] temp = new byte[4];
