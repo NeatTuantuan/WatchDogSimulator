@@ -12,7 +12,7 @@ import java.util.Date;
  * @Version 1.0
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
-public class Status extends Base{
+public class Status extends Message {
     RadomUtil random = new RadomUtil();
 
     /**

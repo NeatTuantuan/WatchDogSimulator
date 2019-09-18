@@ -29,12 +29,12 @@ public class MyDecoder extends ByteToMessageDecoder {
             return;
         }
         byteBuf.markReaderIndex();//标记当前readIndex位置
-        int dataLength = byteBuf.readInt();       // 读取传送过来的消息的长度。ByteBuf 的readInt()方法会让他的readIndex增加4
-        if (dataLength < 0) { // 我们读到的消息体长度为0，这是不应该出现的情况，这里出现这情况，关闭连接。
+        int dataLength = byteBuf.readInt();       // 读取传送过来的消息的长度。ByteBuf 的readInt()方法会让readIndex增加4
+        if (dataLength < 0) { //消息体长度为0，关闭连接。
             channelHandlerContext.close();
         }
 
-        if (byteBuf.readableBytes() < dataLength) { //读到的消息体长度如果小于我们传送过来的消息长度，则resetReaderIndex. 这个配合markReaderIndex使用的。把readIndex重置到mark的地方
+        if (byteBuf.readableBytes() < dataLength) { //读到的消息体长度小于传送过来的消息长度，则resetReaderIndex. 配合markReaderIndex把readIndex重置到mark的地方
             byteBuf.resetReaderIndex();
             return;
         }
@@ -42,7 +42,7 @@ public class MyDecoder extends ByteToMessageDecoder {
         int dataType = byteBuf.readInt();
         System.out.println(dataType);
 
-        byte[] body = new byte[dataLength];  //  嗯，这时候，我们读到的长度，满足我们的要求了，把传送过来的数据，取出来吧~~
+        byte[] body = new byte[dataLength];  // 读到长度，满足要求，取出传送的数据
         byteBuf.readBytes(body);  //
 
 //        byte[] temp = new byte[4];
@@ -54,7 +54,7 @@ public class MyDecoder extends ByteToMessageDecoder {
 //
 //        System.out.println(i);
 
-        Object o = new String(body);  //将byte数据转化为我们需要的对象。伪代码，用什么序列化，自行选择
+        Object o = new String(body);  //序列化
         list.add(o);
     }
 }
