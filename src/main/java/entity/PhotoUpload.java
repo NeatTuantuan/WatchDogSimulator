@@ -13,7 +13,6 @@ import java.util.Date;
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
 public class PhotoUpload extends Message {
-    RadomUtil random = new RadomUtil();
     /**
      * 令牌
      */
@@ -21,15 +20,15 @@ public class PhotoUpload extends Message {
     /**
      * 设备Guid
      */
-    private int GUID = 9527;
+    private String GUID = "DDD4031708-90382";
     /**
      *抓拍时间
      */
     private long PHOTO_TIME = new Date().getTime();
     /**
-     *门禁端比对人员类型（0:住户，1:陌生人）
+     *门禁端比对人员类型（0:住户，1:陌生人）默认值为1
      */
-    private int USER_TYPE = random.nextInt(2);
+    private int USER_TYPE = 0;
     /**
      *抓拍照片
      */
@@ -39,7 +38,7 @@ public class PhotoUpload extends Message {
         return TOKEN;
     }
 
-    public int getGUID() {
+    public String getGUID() {
         return GUID;
     }
 
@@ -59,7 +58,7 @@ public class PhotoUpload extends Message {
         this.TOKEN = TOKEN;
     }
 
-    public void setGUID(int GUID) {
+    public void setGUID(String GUID) {
         this.GUID = GUID;
     }
 
@@ -75,8 +74,8 @@ public class PhotoUpload extends Message {
         this.PHOTO_IMG = PHOTO_IMG;
     }
 
-    public PhotoUpload(byte[] PHOTO_IMG) {
-        this.PHOTO_IMG = PHOTO_IMG;
-    }
+//    public PhotoUpload(byte[] PHOTO_IMG) {
+//        this.PHOTO_IMG = PHOTO_IMG;
+//    }
 
 }

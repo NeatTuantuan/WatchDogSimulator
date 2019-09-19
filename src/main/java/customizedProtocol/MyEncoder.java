@@ -1,4 +1,4 @@
-package nettySimulator;
+package customizedProtocol;
 
 import entity.PhotoUpload;
 import entity.Status;

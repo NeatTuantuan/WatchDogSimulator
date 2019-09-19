@@ -13,8 +13,6 @@ import java.util.Date;
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
 public class Status extends Message {
-    RadomUtil random = new RadomUtil();
-
     /**
      * 令牌
      */
@@ -22,7 +20,7 @@ public class Status extends Message {
     /**
      * 设备Guid
      */
-    private int GUID = 9527;
+    private String GUID = "DDD4031708-90382";
     /**
      * 时间
      */
@@ -30,13 +28,13 @@ public class Status extends Message {
     /**
      *开关门状态（0：开门，1：关门）
      */
-    private int DOOR_STATUS = random.nextInt(2);
+    private int DOOR_STATUS = 1;
 
     public String getTOKEN() {
         return TOKEN;
     }
 
-    public int getGUID() {
+    public String getGUID() {
         return GUID;
     }
 
@@ -52,7 +50,7 @@ public class Status extends Message {
         this.TOKEN = TOKEN;
     }
 
-    public void setGUID(int GUID) {
+    public void setGUID(String GUID) {
         this.GUID = GUID;
     }
 
