@@ -13,25 +13,38 @@ import util.ParseJson;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
- * @ClassName TimeServerHandler
+ * @ClassName HeartBeatServerHandler
  * @Description TODO
  * @Auther tuantuan
  * @Date 2019/9/18 19:17
  * @Version 1.0
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
-public class TimeServerHandler extends ChannelInboundHandlerAdapter {
+public class HeartBeatServerHandler extends ChannelInboundHandlerAdapter {
 
     EntityInit entityInit = new EntityInit();
+    DefaultFullHttpRequest request = null;
+    Timer time = new Timer();
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        while(true){
-            DefaultFullHttpRequest request = RequestBuilder("http://127.0.0.1:8080","127.0.0.1",entityInit.heartBeatInit());
-            ctx.writeAndFlush(request);
-            Thread.sleep(2000);
-        }
+        time.scheduleAtFixedRate(
+                new TimerTask() {
+                    @Override
+                    public void run() {
+                        try {
+                            request = RequestBuilder("http://127.0.0.1:8080","127.0.0.1",entityInit.heartBeatInit());
+                            ctx.writeAndFlush(request);
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                100,2000);
     }
 
 

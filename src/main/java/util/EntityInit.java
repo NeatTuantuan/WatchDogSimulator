@@ -32,7 +32,7 @@ public class EntityInit {
         return photoUpload;
     }
 
-    public Message recordInit(){
+    public Record recordInit(){
         record = new Record();
         int temp = radomUtil.nextInt(2);
         if (temp == 1){
