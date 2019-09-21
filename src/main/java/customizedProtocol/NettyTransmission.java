@@ -1,6 +1,5 @@
-package nettySimulator;
+package customizedProtocol;
 
-import entity.Record;
 import entity.Status;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -8,10 +7,6 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.codec.Delimiters;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
 import util.ImageUtil;
 import util.ParseJson;
 
@@ -25,6 +20,7 @@ import util.ParseJson;
  **/
 public class NettyTransmission {
     static ImageUtil imageUtil = new ImageUtil();
+
     public static void main(String[] args){
         Bootstrap client = new Bootstrap();
         ParseJson parseJson = new ParseJson();
@@ -38,7 +34,7 @@ public class NettyTransmission {
             @Override
             protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
 //                nioSocketChannel.pipeline().addLast(new StringDecoder());
-//                nioSocketChannel.pipeline().addLast(new StringEncoder());
+//                nioSocketChannel.pipeline().addLast(new HttpRequestEncoder());
                 nioSocketChannel.pipeline().addLast(new MyEncoder());
             }
         });

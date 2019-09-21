@@ -1,22 +1,16 @@
 package entity;
 
-import util.RadomUtil;
-
 import java.util.Date;
 
 /**
- * @ClassName Status
+ * @ClassName HeartBeat
  * @Description TODO
  * @Auther tuantuan
- * @Date 2019/9/10 17:23
+ * @Date 2019/9/18 10:00
  * @Version 1.0
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
-public class Status extends Message {
-    /**
-     * 令牌
-     */
-    private String TOKEN = "770fed4ca2aabd20ae9a5dd774711de2";
+public class HeartBeat extends Message {
     /**
      * 设备Guid
      */
@@ -26,13 +20,9 @@ public class Status extends Message {
      */
     private long TIME = new Date().getTime();
     /**
-     *开关门状态（0：开门，1：关门）
+     *门禁状态：0-关闭；1-开启,初始状态为关闭
      */
-    private int DOOR_STATUS = 1;
-
-    public String getTOKEN() {
-        return TOKEN;
-    }
+    private int GATE_STATUS = 0;
 
     public String getGUID() {
         return GUID;
@@ -42,12 +32,8 @@ public class Status extends Message {
         return TIME;
     }
 
-    public int getDOOR_STATUS() {
-        return DOOR_STATUS;
-    }
-
-    public void setTOKEN(String TOKEN) {
-        this.TOKEN = TOKEN;
+    public int getGATE_STATUS() {
+        return GATE_STATUS;
     }
 
     public void setGUID(String GUID) {
@@ -58,9 +44,8 @@ public class Status extends Message {
         this.TIME = TIME;
     }
 
-    public void setDOOR_STATUS(int DOOR_STATUS) {
-        this.DOOR_STATUS = DOOR_STATUS;
+    public void setGATE_STATUS(int GATE_STATUS) {
+        this.GATE_STATUS = GATE_STATUS;
     }
-
 
 }

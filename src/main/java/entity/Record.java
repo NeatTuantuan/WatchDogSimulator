@@ -12,8 +12,7 @@ import java.util.Date;
  * @Version 1.0
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
-public class Record extends Base{
-    RadomUtil random = new RadomUtil();
+public class Record extends Message {
     /**
      * 令牌
      */
@@ -21,7 +20,7 @@ public class Record extends Base{
     /**
      * 设备Guid
      */
-    private int GUID = 9527;
+    private String GUID = "DDD4031708-90382";
     /**
      * 开门时间
      */
@@ -29,29 +28,29 @@ public class Record extends Base{
     /**
      * 开门方式（0：门禁卡，1:人像）
      */
-    private int OPEN_TYPE = random.nextInt(2);
+    private int OPEN_TYPE = 0;
     /**
      * 门禁卡ID
      */
-    private String CARD_ID = random.getIdCardRadom();
+    private String CARD_ID = "190271";
     /**
      * 人卡是否一致（true:一致，false：不一致）
      */
-    private boolean CARD_MATCH_USER = random.nextInt(2) == 1?true:false;
+    private Boolean CARD_MATCH_USER = false;
     /**
      * 开门时人像照片
      */
     private byte[] PHOTO;
 
-    public Record(byte[] PHOTO) {
-        this.PHOTO = PHOTO;
-    }
+//    public Record(byte[] PHOTO) {
+//        this.PHOTO = PHOTO;
+//    }
 
     public String getTOKEN() {
         return TOKEN;
     }
 
-    public int getGUID() {
+    public String getGUID() {
         return GUID;
     }
 
@@ -67,7 +66,7 @@ public class Record extends Base{
         return CARD_ID;
     }
 
-    public boolean getCARD_MATCH_USER() {
+    public Boolean getCARD_MATCH_USER() {
         return CARD_MATCH_USER;
     }
 
@@ -79,7 +78,7 @@ public class Record extends Base{
         this.TOKEN = TOKEN;
     }
 
-    public void setGUID(int GUID) {
+    public void setGUID(String GUID) {
         this.GUID = GUID;
     }
 
@@ -95,7 +94,7 @@ public class Record extends Base{
         this.CARD_ID = CARD_ID;
     }
 
-    public void setCARD_MATCH_USER(boolean CARD_MATCH_USER) {
+    public void setCARD_MATCH_USER(Boolean CARD_MATCH_USER) {
         this.CARD_MATCH_USER = CARD_MATCH_USER;
     }
 

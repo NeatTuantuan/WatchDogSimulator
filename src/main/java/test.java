@@ -16,6 +16,6 @@ public class test extends Random{
     public static void main(String[] args){
         ParseJson parseJson = new ParseJson();
         ImageUtil imageUtil = new ImageUtil();
-        System.out.println(parseJson.Object2Json(new Record(imageUtil.getImageBinary())));
+//        System.out.println(parseJson.Object2Json(new Record(imageUtil.getImageBinary())));
     }
 }

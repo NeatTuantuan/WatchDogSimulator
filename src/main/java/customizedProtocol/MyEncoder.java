@@ -1,6 +1,5 @@
-package nettySimulator;
+package customizedProtocol;
 
-import entity.Base;
 import entity.PhotoUpload;
 import entity.Status;
 import io.netty.buffer.ByteBuf;
