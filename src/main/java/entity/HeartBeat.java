@@ -12,6 +12,10 @@ import java.util.Date;
  **/
 public class HeartBeat extends Message {
     /**
+     * 令牌
+     */
+    private String TOKEN = "770fed4ca2aabd20ae9a5dd774711de2";
+    /**
      * 设备Guid
      */
     private String GUID = "DDD4031708-90382";
@@ -46,6 +50,13 @@ public class HeartBeat extends Message {
 
     public void setGATE_STATUS(int GATE_STATUS) {
         this.GATE_STATUS = GATE_STATUS;
+    }
+    public String getTOKEN() {
+        return TOKEN;
+    }
+
+    public void setTOKEN(String TOKEN) {
+        this.TOKEN = TOKEN;
     }
 
 }

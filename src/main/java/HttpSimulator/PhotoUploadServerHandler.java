@@ -3,7 +3,6 @@ package HttpSimulator;
 import entity.Message;
 import entity.PhotoUpload;
 import entity.Record;
-import entity.Status;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -16,39 +15,42 @@ import util.ParseJson;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.Time;
 import java.util.Timer;
-import java.util.TimerTask;
+
+//import entity.Status;
 
 /**
- * @ClassName EntityServerHandler
+ * @ClassName RecordServerHandler
  * @Description TODO
  * @Auther tuantuan
  * @Date 2019/9/19 20:20
  * @Version 1.0
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
-public class EntityServerHandler extends ChannelInboundHandlerAdapter{
-    EntityInit entityInit = new EntityInit();
+public class PhotoUploadServerHandler extends ChannelInboundHandlerAdapter{
+
     DefaultFullHttpRequest request = null;
     Timer time = new Timer();
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
-        time.scheduleAtFixedRate(
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        try {
-                            request = RequestBuilder("http://127.0.0.1:8080","127.0.0.1",entityInit.recordInit());
-                            ctx.writeAndFlush(request);
-                        } catch (URISyntaxException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-        100,4000);
+//        time.scheduleAtFixedRate(
+//                new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            request = RequestBuilder("http://127.0.0.1:8080","127.0.0.1",entityInit.recordInit());
+//                            ctx.writeAndFlush(request);
+//                        } catch (URISyntaxException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//        100,4000);
+
+        request = RequestBuilder("http://127.0.0.1:8080","127.0.0.1",new EntityInit().photoUploadInit());
+        ctx.writeAndFlush(request);
     }
 
 
@@ -75,9 +77,9 @@ public class EntityServerHandler extends ChannelInboundHandlerAdapter{
         request.headers().set(HttpHeaders.Names.HOST, host);
         request.headers().set(HttpHeaders.Names.CONNECTION, HttpHeaders.Values.KEEP_ALIVE);
         request.headers().set(HttpHeaders.Names.CONTENT_LENGTH, request.content().readableBytes());//可以在httpRequest.headers中设置各种需要的信息。
-        if (message instanceof Status){
+        /**if (message instanceof Status){
             request.headers().set("messageType","Status");
-        }else if (message instanceof Record){
+        }else**/ if (message instanceof Record){
             request.headers().set("messageType","Record");
         }else if (message instanceof PhotoUpload){
             request.headers().set("messageType","PhotoUpload");

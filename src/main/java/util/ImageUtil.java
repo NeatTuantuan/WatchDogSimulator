@@ -34,7 +34,7 @@ public class ImageUtil {
         try {
             bi = ImageIO.read(f);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(bi, "PNG", baos);  //经测试转换的图片是格式这里就什么格式，否则会失真
+            ImageIO.write(bi, "jpg", baos);  //经测试转换的图片是格式这里就什么格式，否则会失真
             byte[] bytes = baos.toByteArray();
 
 //            return encoder.encodeBuffer(bytes).trim();
@@ -59,7 +59,6 @@ public class ImageUtil {
             byte[] bytes = baos.toByteArray();
 
             return encoder.encodeBuffer(bytes).trim();
-//            return bytes;
         } catch (IOException e) {
             e.printStackTrace();
         }

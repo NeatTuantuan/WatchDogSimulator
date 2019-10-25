@@ -1,6 +1,9 @@
 package HttpSimulator;
 
-import entity.*;
+import entity.Message;
+import entity.PhotoUpload;
+import entity.Record;
+//import entity.Status;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -13,58 +16,45 @@ import util.ParseJson;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * @ClassName HeartBeatServerHandler
+ * @ClassName RecordServerHandler
  * @Description TODO
  * @Auther tuantuan
- * @Date 2019/9/18 19:17
+ * @Date 2019/9/19 20:20
  * @Version 1.0
  * @Attention Copyright (C)，2004-2019，BDILab，XiDian University
  **/
-public class HeartBeatServerHandler extends ChannelInboundHandlerAdapter {
-    private EntityInit entityInit;
+public class RecordServerHandler extends ChannelInboundHandlerAdapter{
+
     DefaultFullHttpRequest request = null;
     Timer time = new Timer();
 
-    /**
-     * 设置EntityInit
-     * @param entityInit
-     */
-    public void setEntityInit(EntityInit entityInit) {
-        this.entityInit = entityInit;
-    }
-
-    /**
-     * 发送HTTP信息
-     * @param ctx
-     * @throws Exception
-     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        time.scheduleAtFixedRate(
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        try {
-                            request = RequestBuilder("http://127.0.0.1:8080","127.0.0.1",entityInit.heartBeatInit());
-                            ctx.writeAndFlush(request);
-                        } catch (URISyntaxException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                100,2000);
+
+//        time.scheduleAtFixedRate(
+//                new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            request = RequestBuilder("http://127.0.0.1:8080","127.0.0.1",entityInit.recordInit());
+//                            ctx.writeAndFlush(request);
+//                        } catch (URISyntaxException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//        100,4000);
+
+        request = RequestBuilder("http://127.0.0.1:8080","127.0.0.1",new EntityInit().recordInit());
+        ctx.writeAndFlush(request);
     }
 
-    /**
-     * 异常捕获
-     * @param ctx
-     * @param cause
-     * @throws Exception
-     */
+
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace();
@@ -90,14 +80,13 @@ public class HeartBeatServerHandler extends ChannelInboundHandlerAdapter {
         request.headers().set(HttpHeaders.Names.CONTENT_LENGTH, request.content().readableBytes());//可以在httpRequest.headers中设置各种需要的信息。
         /**if (message instanceof Status){
             request.headers().set("messageType","Status");
-        }else **/if (message instanceof Record){
+        }else**/ if (message instanceof Record){
             request.headers().set("messageType","Record");
         }else if (message instanceof PhotoUpload){
             request.headers().set("messageType","PhotoUpload");
         }else {
             request.headers().set("messageType","HeartBeat");
         }
-
         request.headers().set("businessType","testServerStatus");
         return request;
 

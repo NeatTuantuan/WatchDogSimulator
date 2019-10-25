@@ -26,7 +26,7 @@ public class PhotoUpload extends Message {
      */
     private long PHOTO_TIME = new Date().getTime();
     /**
-     *门禁端比对人员类型（0:住户，1:陌生人）默认值为1
+     *门禁端比对人员类型（0:住户，1:陌生人）默认值为0
      */
     private int USER_TYPE = 0;
     /**
